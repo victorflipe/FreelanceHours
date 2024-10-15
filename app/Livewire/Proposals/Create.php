@@ -23,7 +23,6 @@ class Create extends Component
     #[Rule(['required', 'numeric', 'gt:0'])]
     public int $hours = 0;
 
-
     public bool $agree = false;
 
 
@@ -71,7 +70,7 @@ class Create extends Component
 
         if ($otherProposal) {
             $proposal->update(['position_status' => 'up']);
-            $objProposal = Proposal::fin($otherProposal);
+            $objProposal = Proposal::find($otherProposal->id);
             $objProposal->update(['position_status' => 'down']);
             $objProposal->notify(new LostPosition($this->project));
         }
